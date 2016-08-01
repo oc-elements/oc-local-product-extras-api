@@ -17,6 +17,8 @@ Element to consume Ordercloud Local Product Extras API
     <iron-ajax id="deleteExtraSet"></iron-ajax>
     <iron-ajax id="updateExtraSet"></iron-ajax>
     <iron-ajax id="getExtraSet"></iron-ajax>
+    <iron-ajax id="enableExtraSet"></iron-ajax>
+    <iron-ajax id="disableExtraSet"></iron-ajax>
 
     <iron-ajax id="createExtra"></iron-ajax>
     <iron-ajax id="updateExtra"></iron-ajax>
@@ -155,6 +157,32 @@ Element to consume Ordercloud Local Product Extras API
         this.$.deleteExtra.method = "DELETE";
         this.$.deleteExtra.contentType = "application/json";
         return this._generateRequest(this.$.deleteExtra);
+      },
+
+      /**
+       * Enable an extra set
+       *
+       * @param extraSetId Number
+       * @return {Promise}
+       */
+      enableExtraSet: function(extraSetId) {
+        this.$.enableExtraSet.url = this._url('product/extras/set/' + extraSetId + '/enable');
+        this.$.enableExtraSet.method = "PUT";
+        this.$.enableExtraSet.contentType = "application/json";
+        return this._generateRequest(this.$.enableExtraSet);
+      },
+
+      /**
+       * Disable an extra set
+       *
+       * @param extraSetId Number
+       * @return {Promise}
+       */
+      disableExtraSet: function(extraSetId) {
+        this.$.disableExtraSet.url = this._url('product/extras/set/' + extraSetId + '/disable');
+        this.$.disableExtraSet.method = "PUT";
+        this.$.disableExtraSet.contentType = "application/json";
+        return this._generateRequest(this.$.disableExtraSet);
       }
     });
   </script>
