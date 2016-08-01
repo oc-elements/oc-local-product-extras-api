@@ -13,6 +13,16 @@ Element to consume Ordercloud Local Product Extras API
 <dom-module id="oc-local-product-extras-api">
   <template>
     <iron-ajax id="getExtraSets"></iron-ajax>
+    <iron-ajax id="createExtraSet"></iron-ajax>
+    <iron-ajax id="deleteExtraSet"></iron-ajax>
+    <iron-ajax id="updateExtraSet"></iron-ajax>
+    <iron-ajax id="getExtraSet"></iron-ajax>
+
+    <iron-ajax id="createExtra"></iron-ajax>
+    <iron-ajax id="updateExtra"></iron-ajax>
+    <iron-ajax id="getExtras"></iron-ajax>
+    <iron-ajax id="getExtra"></iron-ajax>
+    <iron-ajax id="deleteExtra"></iron-ajax>
   </template>
 
   <script>
@@ -30,6 +40,122 @@ Element to consume Ordercloud Local Product Extras API
         return this._generateRequest(this.$.getExtraSets);
       },
 
+      /**
+       * Create a new extra set for an Organisation
+       *
+       * @param {{ name:String, displayName:String, description:String }} extraSet
+       * @return {Promise}
+       */
+      createExtraSet: function(extraSet) {
+        this.$.createExtraSet.url = this._url('product/extras/set');
+        this.$.createExtraSet.method = "POST";
+        this.$.createExtraSet.contentType = "application/json";
+        this.$.createExtraSet.body = extraSet;
+        return this._generateRequest(this.$.createExtraSet);
+      },
+
+      /**
+       * Delete an extra set of an Organisation
+       *
+       * @param extraSetId Number
+       * @return {Promise}
+       */
+      deleteExtraSet: function(extraSetId) {
+        this.$.deleteExtraSet.url = this._url('product/extras/set/' + extraSetId);
+        this.$.deleteExtraSet.method = "DELETE";
+        this.$.deleteExtraSet.contentType = "application/json";
+        return this._generateRequest(this.$.deleteExtraSet);
+      },
+
+      /**
+       * Update an extra set of an Organisation
+       *
+       * @param extraSetId Number
+       * @param {{ name:String, displayName:String, description:String }} extraSet
+       * @return {Promise}
+       */
+      updateExtraSet: function(extraSetId, extraSet) {
+        this.$.updateExtraSet.url = this._url('product/extras/set/' + extraSetId);
+        this.$.updateExtraSet.method = "PUT";
+        this.$.updateExtraSet.contentType = "application/json";
+        this.$.updateExtraSet.body = extraSet;
+        return this._generateRequest(this.$.updateExtraSet);
+      },
+
+      /**
+       * Get an Extra Set of an organisation
+       *
+       * @param extraSetId Number
+       * @return {Promise}
+       */
+      getExtraSet: function(extraSetId) {
+        this.$.getExtraSet.url = this._url('product/extras/set/' + extraSetId);
+        return this._generateRequest(this.$.getExtraSet);
+      },
+
+      /**
+       * Create a new extra for an Organisation
+       *
+       * @param organisationId Number
+       * @param {{ name:String, description:String, price:Number, setId:Number }} extra
+       * @return {Promise}
+       */
+      createExtra: function(organisationId, extra) {
+        this.$.createExtra.url = this._url('product/extras/organisation/' + organisationId);
+        this.$.createExtra.method = "POST";
+        this.$.createExtra.contentType = "application/json";
+        this.$.createExtra.body = extra;
+        return this._generateRequest(this.$.createExtra);
+      },
+
+      /**
+       * Return all Extras of an organisation
+       *
+       * @param organisationId Number
+       * @return {Promise}
+       */
+      getExtras: function(organisationId) {
+        this.$.getExtras.url = this._url('product/extras/organisation/' + organisationId);
+        return this._generateRequest(this.$.getExtras);
+      },
+
+      /**
+       * Get a specific extra
+       *
+       * @param extraId Number
+       * @return {Promise}
+       */
+      getExtra: function(extraId) {
+        this.$.getExtra.url = this._url('product/extras/' + extraId);
+        return this._generateRequest(this.$.getExtra);
+      },
+
+      /**
+       * Update an extra
+       * @param extraId Number
+       * @param {{ name: String, description: String, price: Number, setId: Number }} extra
+       * @return {Promise}
+       */
+      updateExtra: function(extraId, extra) {
+        this.$.updateExtra.url = this._url('product/extras/' + extraId);
+        this.$.updateExtra.method = "PUT";
+        this.$.updateExtra.contentType = "application/json";
+        this.$.updateExtra.body = extra;
+        return this._generateRequest(this.$.updateExtra);
+      },
+
+      /**
+       * Delete a specific extra
+       *
+       * @param extraId Number
+       * @return {Promise}
+       */
+      deleteExtra: function(extraId) {
+        this.$.deleteExtra.url = this._url('product/extras/' + extraId);
+        this.$.deleteExtra.method = "DELETE";
+        this.$.deleteExtra.contentType = "application/json";
+        return this._generateRequest(this.$.deleteExtra);
+      }
     });
   </script>
 </dom-module>
