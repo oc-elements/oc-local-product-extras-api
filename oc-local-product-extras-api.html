@@ -12,13 +12,23 @@ Element to consume Ordercloud Local Product Extras API
 
 <dom-module id="oc-local-product-extras-api">
   <template>
-    <iron-ajax id=""></iron-ajax>
+    <iron-ajax id="getExtraSets"></iron-ajax>
   </template>
 
   <script>
     Polymer({
       is: 'oc-local-product-extras-api',
       behaviors: [OC.Behaviours.ApiProvider],
+
+      /**
+       * Return all Extra Sets of an organisation
+       *
+       * @return {Promise}
+       */
+      getExtraSets: function(page, pageSize) {
+        this.$.getExtraSets.url = this._url('product/extras/set?page=' + page + '&pagesize=' + pageSize);
+        return this._generateRequest(this.$.getExtraSets);
+      },
 
     });
   </script>
